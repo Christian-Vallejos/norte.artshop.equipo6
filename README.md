@@ -1,0 +1,1 @@
+# norte.artshop.equipo6
