@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Contacto";
+}
+
+
+
+
+<body>
+
+
+    <h2>Carga de objetos usando JS.</h2>
+
+    <div id="contenedor">
+        <br>
+
+        <label for="txtCodigo">Codigo:</label>
+        <input type="text" id="txtCodigo" title="Codigo...">
+
+        <br><br>
+
+
+        <label for="txtNombre">Nombre:</label>
+        <input type="text" id="txtNombre" title="Nombre...">
+        <br><br>
+
+
+        <button id="btnGuardar" type="submit" onclick="Guardar()">Guardar</button> |
+        <button id="btnMostrarLista" type="submit" onclick="MostrarLista()">Mostrar Lista</button>  |
+        <button id="btnLimpiar" type="submit" onclick="LimpiarLista()">Limpiar Lista</button>
+
+        <br><br><br><br>
+
+        <div id="DivLista"> </div>
+
+    </div>
+
+    
+
+
+
+
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+
+
+    class MiObjeto {
+        Codigo;
+        Nombre;
+
+        Fill(cod, nom)
+        {
+            this.Codigo = cod;
+            this.Nombre = nom; 
+        }
+    }
+
+    var lista  = [];
+    var ilista = 0;
+
+    function Guardar()
+    {
+        var codigo = document.getElementById('txtCodigo').value;
+        var Nombre = document.getElementById('txtNombre').value;
+        if (codigo != "" && Nombre != "") {
+            var o = new MiObjeto();
+            o.Fill(codigo, Nombre);
+            lista.push(o);
+            ilista++;
+        }
+
+    }
+
+
+    function MostrarLista()
+    {
+
+        if (lista.length > 0)
+        {
+            limpiar();
+            var html = '';
+            html += 'Lista de Objetos';
+            html += '<ul >'
+            for (var i = 0; i < lista.length; i++) {
+                html += '<li> Codigo:' + lista[i].Codigo + '&#8195 Nombre: '+ lista[i].Nombre + ' </li>';
+            }
+
+            html += '</ul>';
+
+            $('#DivLista').append(html);
+        }
+
+    }
+
+    function LimpiarLista()
+    {
+        lista = [];
+        limpiar();
+    }
+
+    function limpiar()
+    {
+        const el = document.getElementById('DivLista');
+        while (el.firstChild)
+            el.removeChild(el.firstChild);
+    }
+
+    /*
+    $('#btnMostrarLista').click(function (e) {
+
+        e.preventDefault();
+        if (lista != null ) {
+            var html = '';
+
+
+            html += 'Lista de Objetos';
+            html += '<tr>'
+            for (var i = 0; i < lista.length; i++) {
+                html += '<td> Codigo:' + lista[i].Codigo + ', Nombre: ' + lista[i].Nombre+' </td>'
+            }
+
+            html += '</tr>'
+
+            $('#DivLista').append(html);
+
+
+        }
+    });
+
+*/
+
+</script>

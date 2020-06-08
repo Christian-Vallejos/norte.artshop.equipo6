@@ -15,14 +15,33 @@ namespace WebSite_Equipo6.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Acerca de nosotros.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Datos de Contacto.";
+
+            return View();
+        }
+        public ActionResult ListadoCuadros()
+        {
+            ViewBag.Message = "Listado de Cuadros Disponibles";
+
+            return View();
+        }
+
+        public ActionResult AccesoAdministracion()
+        {
+            ViewBag.Message = "Acceso Administracion";
+
+            return View();
+        }
+        public ActionResult RegistrarUsuario()
+        {
+            ViewBag.Message = "Registrar Usuario";
 
             return View();
         }
