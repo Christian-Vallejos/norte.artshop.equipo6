@@ -1,0 +1,24 @@
+﻿@model IEnumerable<norte.ArtshopEquipo6.Data.Model.Artista>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+    <div class="post">
+        <h2 class="title"> Lista de Artistas</h2>
+        <p class="byline"> Hay un total de @Enumerable.Count(Model) restaurantes</p>
+        <div>
+            <h2 class="categories"> Artistas</h2>
+
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li class="byline">@item.FirstName @item.LastName @item.Country </li>
+                }
+            </ul>
+
+        </div>
+
+
+
+    </div>
