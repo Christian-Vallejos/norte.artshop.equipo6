@@ -30,8 +30,23 @@ namespace norte.ArtshopEquipo6.Data.Services
 
         public IEnumerable<Artista> GetArtistas()
         {
-            // return restaurants.OrderBy(o => o.Name);
             return artistas.OrderBy(a=> a.Id);
         }
+
+
+        public bool AddArtista(Artista art)
+        {
+            try
+            {
+                this.artistas.Add(art);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
     }
 }

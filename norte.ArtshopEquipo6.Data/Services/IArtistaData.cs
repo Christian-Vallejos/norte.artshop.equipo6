@@ -11,5 +11,7 @@ namespace norte.ArtshopEquipo6.Data.Services
     {
         IEnumerable<Artista> GetArtistas();
 
+        bool AddArtista(Artista art);
+
     }
 }

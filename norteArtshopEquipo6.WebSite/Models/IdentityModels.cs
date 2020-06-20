@@ -29,5 +29,7 @@ namespace norteArtshopEquipo6.WebSite.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<norte.ArtshopEquipo6.Data.Model.Artista> Artistas { get; set; }
     }
 }
