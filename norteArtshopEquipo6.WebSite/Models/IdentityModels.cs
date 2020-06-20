@@ -31,5 +31,7 @@ namespace norteArtshopEquipo6.WebSite.Models
         }
 
         public System.Data.Entity.DbSet<norte.ArtshopEquipo6.Data.Model.Artista> Artistas { get; set; }
+
+        public System.Data.Entity.DbSet<norte.ArtshopEquipo6.Data.Model.Producto> Productoes { get; set; }
     }
 }

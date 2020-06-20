@@ -14,8 +14,12 @@ namespace norte.ArtshopEquipo6.Data.Services
         public InMemoryArtistaData() {
 
             artistas = new List<Artista>();
-            artistas.Add(new Artista() { Id = 1, ChangedBy="User 1",ChangedOn=DateTime.Now, Country="Argentina",
-                CreatedBy="Test",CreatedOn=DateTime.Now, Description="Artista n 1",FirstName="Carlos", LastName="Bianchi",LifeSpan="span",TotalProducts=1
+            artistas.Add(new Artista() { Id = 1, ChangedBy="User 1",
+                ChangedOn=DateTime.Now,
+                Country="Argentina",
+                CreatedBy="Test",
+                CreatedOn=DateTime.Now, 
+                Description="Artista n 1",FirstName="Carlos", LastName="Bianchi",LifeSpan="span",TotalProducts=1
             });
             artistas.Add(new Artista() { Id = 2, ChangedBy="User 2",ChangedOn=DateTime.Now, Country="Argentina",
                 CreatedBy="Test",CreatedOn=DateTime.Now, Description="Artista n 2",FirstName="Marcelo", LastName="Gallardo",LifeSpan="span",TotalProducts=2
