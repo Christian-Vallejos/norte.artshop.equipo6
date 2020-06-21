@@ -26,5 +26,7 @@ namespace norte.ArtshopEquipo6.Data.Model
         public DateTime ChangedOn { get; set; }
         public string ChangedBy { get; set; }
 
+
+        public virtual Artista Artista { get; set; }
     }
 }
