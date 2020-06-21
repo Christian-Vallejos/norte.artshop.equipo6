@@ -14,7 +14,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
         // GET: Producto
         public ActionResult Index()
-        {
+       {
             var list = db.GetProductos();
             return View(list);
         }

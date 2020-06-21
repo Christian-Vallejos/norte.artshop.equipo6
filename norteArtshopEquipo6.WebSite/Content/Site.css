@@ -227,6 +227,9 @@ table {
     background-color: #110404;
 }
 
+button-small {
+width: 30px;
+}
 /* Sidebar */
 #sidebar {
     float: right;
@@ -337,3 +340,28 @@ table {
             text-decoration: none;
         }
 
+
+.container-enlarge {
+    display: inline-block;
+    position: relative;
+    margin: 15px;
+}
+
+    .container-enlarge > img {
+        height: auto;
+        max-width: 100%;
+        width: 150px;
+        border-radius: 5px;
+    }
+
+    .container-enlarge span {
+        position: absolute;
+        top: -9999em;
+        left: -9999em;
+    }
+
+    .container-enlarge:hover span {
+        top: -320px;
+        left: -75px;
+        width: 300px;
+    }

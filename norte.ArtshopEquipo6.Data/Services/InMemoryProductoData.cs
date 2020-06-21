@@ -23,8 +23,8 @@ namespace norte.ArtshopEquipo6.Data.Services
                 Id = 1,
                 Title = "El Grito",
                 AvgStars = 3,
-                Description = "Imitacion de cuadro clasico calidad premium",
-                Image = "futura imagen",
+                Description = "Calidad Premium",
+                Image = "/Content/img/el-grito.png",
                 Price = 3500,
                 QuantitySold = 3,
                 ChangedOn = DateTime.Now,
@@ -32,6 +32,39 @@ namespace norte.ArtshopEquipo6.Data.Services
                 CreatedOn = DateTime.Now,
                 ChangedBy = "Test"
             });
+
+            productos.Add(new Producto()
+            {
+                ArtistId = 1,
+                Id = 2,
+                Title = "La Persistencia",
+                AvgStars = 3,
+                Description = "Clasico inigualable",
+                Image = "/Content/img/la-persistencia.jpg",
+                Price = 3500,
+                QuantitySold = 3,
+                ChangedOn = DateTime.Now,
+                CreatedBy = "Test",
+                CreatedOn = DateTime.Now,
+                ChangedBy = "Test"
+            });
+
+            productos.Add(new Producto()
+            {
+                ArtistId = 1,
+                Id = 3,
+                Title = "La Persistencia",
+                AvgStars = 5,
+                Description = "Clasico - Impresionista",
+                Image = "/Content/img/noche.jpg",
+                Price = 3500,
+                QuantitySold = 30,
+                ChangedOn = DateTime.Now,
+                CreatedBy = "Test",
+                CreatedOn = DateTime.Now,
+                ChangedBy = "Test"
+            });
+
         }
         
         
