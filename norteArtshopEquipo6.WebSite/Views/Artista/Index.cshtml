@@ -6,7 +6,7 @@
 
 
     <div class="post">
-        <h2 class="title" style="padding-left:35px"> Lista de Artistas</h2>
+        <h2 class="title"><a href="#">Lista de Artistas</a></h2>
         <p class="byline"> Hay un total de @Enumerable.Count(Model) artistas.</p>
 
         <button onclick="window.location.href='@Url.Action("Create", "Artista")'"> Nuevo Artista </button>
@@ -15,7 +15,7 @@
 
         <div>
             <br />
-            <table class="table">
+            <table id="tabla" class="table">
                 <tr>
                     <th width="20%">
                         Nombre

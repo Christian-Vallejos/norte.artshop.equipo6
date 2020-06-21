@@ -1,4 +1,9 @@
 ﻿/*IMPORTANTE - No modificar estos estilos, ya que son imprescindibles para que la pagina se vea correctamente.*/
+html{
+    width: 100%;
+    height: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,14 +15,31 @@ body {
     text-align: justify;
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 13px;
-    font-style: italic;
-    color: #7D807A;
+    color: #FFFFFF;
+    width: 100%;
 }
 
 h1, h2, h3 {
-    color: #AA2808;
+    color: #FFFFFF;
 }
 
+button {
+    padding: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-family: 'Century Gothic';
+    font-weight: 300;
+    font-size: 25px;
+    background-color: #C11414;
+    border: 3px double #110404;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+button:hover{
+    opacity: 0.6;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 p, blockquote, ul, ol {
     margin-bottom: 20px;
@@ -32,7 +54,7 @@ ul, ol, li {
 
 a {
     text-decoration: underline;
-    color: #E14949;
+    color: #FFFFFF;
 }
 
     a:hover {
@@ -43,14 +65,14 @@ a {
 /************************** layout **************************/
 
 #wrapper {
-    width: 900px;
+    width: 940px;
     margin: 0 auto;
 }
 
 /* Header */
 #header {
-    height: 140px;
-    background: url('/content/img/header.jpg') no-repeat left top;
+    height: 184px;
+    background: url('/content/img/headerarte.jpg') no-repeat center top;
 }
 
 /**** Logo ****/
@@ -66,33 +88,32 @@ a {
     #logo h1 {
         margin: 0;
         padding: 10px 0px 0px 0px;
-        text-transform: lowercase;
         font: normal 46px 'Open Sans', Arial, sans-serif;
+        font-family: 'Century Gothic';
     }
 
     #logo h2 {
         margin: -2px 0 0 0;
         padding: 0;
-        text-transform: lowercase;
         letter-spacing: 2px;
         font-size: 12px;
         font-weight: normal;
-        font-style: italic;
         color: #FFFFFF;
     }
 
     #logo a {
         text-decoration: none;
         color: #FFFFFF;
+        background-color: rgb(201, 143, 48);
+        padding: 2px;
     }
 
 /**** Menu ****/
 #menu {
-    width: 872px;
+    width: 940px;
     height: 41px;
     margin: 0 auto;
-    padding: 0px 0px 0px 28px;
-    background: url('/content/img/menu.jpg') no-repeat left top;
+    background-color: rgb(201, 143, 48);
 }
 
     #menu ul {
@@ -114,29 +135,30 @@ a {
         text-decoration: none;
         text-align: center;
         text-transform: lowercase;
-        font-family: 'Open Sans', Arial, sans-serif;
-        font-size: 14px;
+        font-family: 'Open Sans', 'Century Gothic', sans-serif;
+        font-size: 18px;
         font-weight: normal;
-        font-style: italic;
         color: #FFFFFF;
     }
 
         #menu a:hover, #menu .active a {
-            background: #C11212;
+            background: #AA2808;
             color: #FFFFFF;
         }
 
 #page {
-    width: 844px;
+    width: 940px;
     margin: 0 auto;
-    padding: 0px 28px;
-    background: #FFFFFF url('/content/img/bg.jpg') repeat-y left top;
+    padding: 0px 0px;
+    background: #c9610f;
 }
 
 #content {
     float: left;
-    width: 560px;
+    width: 590px;
     padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .post {
@@ -145,20 +167,18 @@ a {
 }
 
     .post .title {
-        background: url('/content/img/item.jpg') no-repeat left 0px;
         margin: 0px;
         color: #BF0B0B;
     }
 
         .post .title a {
-            padding: 0px 0px 0px 40px;
+/*            padding: 0px 0px 0px 40px;*/
             letter-spacing: -1px;
             text-decoration: none;
-            font-family: 'Open Sans', Arial, sans-serif;
+            font-family: 'Open Sans', 'Century Gothic', sans-serif;
             font-size: 28px;
             font-weight: normal;
-            font-style: italic;
-            color: #BF0B0B;
+            color: #FFFFFF;
         }
 
     .post .entry {
@@ -171,20 +191,48 @@ a {
     }
 
     .post .byline {
-        padding-left: 40px;
+/*        padding-left: 42px;*/
         font-size: 12px;
-        font-style: italic;
         text-transform: lowercase;
-        color: #7D807A;
+        color: #d9d8d8;
     }
+tbody {
+    text-align: center;
+}
+th {
+    letter-spacing: 2px;
+}
 
+td {
+    letter-spacing: 1px;
+}
+
+tbody td {
+    text-align: center;
+}
+
+tfoot th {
+    text-align: right;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #be771e;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #D4C792;
+}
+
+table {
+    background-color: #110404;
+}
 
 /* Sidebar */
 #sidebar {
     float: right;
     width: 230px;
-    margin: 20px 0px;
-    padding: 10px 0px 30px 30px;
+    padding: 10px 40px 30px 15px;
+    background-color: #be771e;
 }
 
     #sidebar ul {
@@ -216,8 +264,7 @@ a {
         font-family: 'Open Sans', Arial, sans-serif;
         font-size: 18px;
         font-weight: normal;
-        font-style: italic;
-        color: #BF0B0B;
+        color: #FFFFFF;
     }
 
     #sidebar h3 {
@@ -234,7 +281,7 @@ a {
     #sidebar a {
         border: none;
         text-decoration: none;
-        color: #7D807A;
+        color: #d9d8d8;
     }
 
         #sidebar a:hover {
@@ -269,10 +316,10 @@ a {
 }
 
 #footer {
-    height: 100px;
+    height: 40px;
     padding: 14px 0px 0px 0px;
-    background: url('/content/img/post.gif') no-repeat left top;
-    color: #9C9C9C;
+    background-color: rgb(201, 143, 48);
+    color: #FFFFFF;
 }
 
     #footer p {
@@ -289,3 +336,4 @@ a {
         #footer a:hover {
             text-decoration: none;
         }
+
