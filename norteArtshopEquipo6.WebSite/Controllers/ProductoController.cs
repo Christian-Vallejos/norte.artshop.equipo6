@@ -35,6 +35,9 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             {
                 // TODO: Add insert logic here
                 bool resultado = false;
+
+                prod.CreatedOn = DateTime.Now;
+
                 resultado = db.AddProducto(prod);
 
                 if (resultado)
