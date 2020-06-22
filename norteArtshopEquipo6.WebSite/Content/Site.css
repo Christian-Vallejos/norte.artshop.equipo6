@@ -134,7 +134,7 @@ a {
         padding: 8px 20px 0px 20px;
         text-decoration: none;
         text-align: center;
-        text-transform: lowercase;
+        text-transform: capitalize;
         font-family: 'Open Sans', 'Century Gothic', sans-serif;
         font-size: 18px;
         font-weight: normal;
@@ -193,7 +193,7 @@ a {
     .post .byline {
 /*        padding-left: 42px;*/
         font-size: 12px;
-        text-transform: lowercase;
+        text-transform: capitalize;
         color: #d9d8d8;
     }
 tbody {
