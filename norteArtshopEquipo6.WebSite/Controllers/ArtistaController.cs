@@ -8,18 +8,17 @@ using System.Web.Mvc;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
-    public class ArtistaController : Controller
+    public class ArtistaController : BaseControllerBorrar
     {
-        //get de artistas
+        private BaseDataService<Artista> db = new BaseDataService<Artista>();
 
-        internal static IArtistaData db = new InMemoryArtistaData();
 
         public ArtistaController() {
             
         }
         public ActionResult Index()
         {
-            var list = db.GetArtistas();
+            var list = db.Get();
             return View(list);
         }
 
@@ -28,7 +27,6 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         public ActionResult Create()
         {
             var model = new Artista();
-
             return View(model);
         }
 
@@ -38,7 +36,15 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         public ActionResult Create(Artista art)
         {
             bool resultado = false;
-            resultado = db.AddArtista(art);
+
+            CheckAuditPattern(art, false);
+
+            if (ModelState.IsValid)
+                resultado = db.Create(art);
+            else
+                return View(art);
+
+
 
             if(resultado)
                 return RedirectToAction("Index");

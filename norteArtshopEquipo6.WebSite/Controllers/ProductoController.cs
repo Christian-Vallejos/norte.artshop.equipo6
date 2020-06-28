@@ -8,14 +8,14 @@ using System.Web.Mvc;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
-    public class ProductoController : Controller
+    public class ProductoController : BaseControllerBorrar
     {
-        internal static IProductoData db = new InMemoryProductoData();
+        private BaseDataService<Producto> db = new BaseDataService<Producto>();
 
         // GET: Producto
         public ActionResult Index()
        {
-            var list = db.GetProductos();
+            var list = db.Get();
             return View(list);
         }
 
@@ -33,12 +33,15 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 bool resultado = false;
 
-                prod.CreatedOn = DateTime.Now;
+                CheckAuditPattern(prod, false);
 
-                resultado = db.AddProducto(prod);
+                if (ModelState.IsValid)
+                    resultado = db.Create(prod);
+                else
+                    return View(prod);
+
 
                 if (resultado)
                     return RedirectToAction("Index");
@@ -50,12 +53,6 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 return View(prod);
             }
         }
-
-
-
-
-
-
 
 
 
