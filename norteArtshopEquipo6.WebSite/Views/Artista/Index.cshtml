@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@if (User.Identity.IsAuthenticated)
+{
 
     <div class="post">
         <h2 class="title"><a href="#">Lista de Artistas</a></h2>
@@ -62,7 +63,9 @@
 
 
         </div>
-
-
-
     </div>
+}
+else
+{
+    Response.Redirect("/Home/Index");
+}

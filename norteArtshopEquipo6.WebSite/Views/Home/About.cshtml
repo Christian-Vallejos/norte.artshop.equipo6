@@ -4,12 +4,20 @@
 <h2>@ViewBag.Title.</h2>
 @*<h3>@ViewBag.Message</h3>*@
 
-<p>
-    ART SHOP nace para crear un puente entre artistas talentosos y gente que quiere conectar y disfrutar del arte.
-    Para dar lugar a UNA EXPERIENCIA MODIFICADORA, donde las obras tengan la oportunidad de “irrumpir creativamente”
-    en la vida de las PERSONAS para fusionarse con ellas, para modificarlas, y enriquecerlas para siempre.
-    Las personas que formamos ART SHOP sentimos que las obras de arte no nacen “sólo para algunos”. 
-    Por el contrario, estamos convencidos de que las obras COBRAN VIDA para hacer eco en todos aquellos que se
-    DESCUBRAN modificados en contacto con ellas. 
-    En este encuentro RADICA LA MAGIA: cuando "conectamos" con una obra que sentimos "es para nosotros".
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+
+    <p>
+        ART SHOP nace para crear un puente entre artistas talentosos y gente que quiere conectar y disfrutar del arte.
+        Para dar lugar a UNA EXPERIENCIA MODIFICADORA, donde las obras tengan la oportunidad de “irrumpir creativamente”
+        en la vida de las PERSONAS para fusionarse con ellas, para modificarlas, y enriquecerlas para siempre.
+        Las personas que formamos ART SHOP sentimos que las obras de arte no nacen “sólo para algunos”.
+        Por el contrario, estamos convencidos de que las obras COBRAN VIDA para hacer eco en todos aquellos que se
+        DESCUBRAN modificados en contacto con ellas.
+        En este encuentro RADICA LA MAGIA: cuando "conectamos" con una obra que sentimos "es para nosotros".
+    </p>
+}
+else
+{
+    Response.Redirect("/Home/Index");
+}

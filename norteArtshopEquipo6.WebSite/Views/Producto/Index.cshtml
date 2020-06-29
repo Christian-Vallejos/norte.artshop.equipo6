@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<norte.ArtshopEquipo6.Data.Model.Product>
 
-
+@if (User.Identity.IsAuthenticated)
+{
 
     <div class="post">
-        <h2 class="title" style="padding-left:35px"> Lista de Obras de Arte disponibles.</h2>
+        <h2> Lista de Obras de Arte disponibles.</h2>
         <p class="byline"> Hay un total de @Enumerable.Count(Model)  obras de arte.</p>
 
         <button class="byline" onclick="window.location.href='@Url.Action("Create", "Producto")'"> Nueva Obra de arte </button>
@@ -84,9 +85,9 @@
 
 
         </div>
-
-
-
-
-
-        </div>
+    </div>
+}
+else
+{
+    Response.Redirect("/Home/Index");
+}

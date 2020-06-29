@@ -23,18 +23,19 @@ namespace norte.ArtshopEquipo6.Data.Model
         [Display(Name = "Artista")]
         public int ArtistId { get; set; }
 
+        [Required]
         [Display(Name = "Imagen")]
         public string Image { get; set; }
 
         [Required]
         [Display(Name = "Precio")]
-        public float  Price{ get; set; }
+        public double  Price{ get; set; }
 
         [Display(Name = "Cantidad Vendida")]
         public int QuantitySold { get; set; }
 
         [Display(Name = "Estrellas Promedio")]
-        public float AvgStars { get; set; }
+        public double AvgStars { get; set; }
 
         public virtual Artist Artist { get; set; }
 
