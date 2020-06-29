@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Net;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
@@ -34,12 +35,8 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         public ActionResult Create()
         {
             var Producto = new Product();
-            List<SelectListItem> lst = new List<SelectListItem>();
 
-            dbArtist.Get().ForEach(a =>
-             lst.Add(new SelectListItem() { Text = a.FullName, Value = a.Id.ToString() }));
-            ViewBag.artistas = lst;
-           
+            ViewBag.Artistas =  new SelectList(dbArtist.Get(), "Id", "FullName");
             return View(Producto);
         }
 
@@ -50,23 +47,23 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             try
             {
                 bool resultado = false;
-                prod.ChangedBy = User.Identity.GetUserName();
-                prod.CreatedBy = User.Identity.GetUserName();
-                prod.CreatedOn = DateTime.Now;
-                prod.ChangedOn = DateTime.Now;
-                prod.ArtistId = 29;
-  
+
+                //Este metodo llena los campos de Createdon/changedby....
                 CheckAuditPattern(prod, false);
 
                 if (ModelState.IsValid)
+                {
                     resultado = db.Create(prod);
-                else
-                    return View(prod);
 
-                if (resultado)
-                    return RedirectToAction("Index");
-                else
-                    return View(prod);
+                    if (resultado)
+                        return RedirectToAction("Index");
+                    else
+                        return View(prod);
+                }
+
+
+                ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",prod.ArtistId);
+                return View(prod);
             }
             catch
             {
@@ -80,7 +77,12 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         // GET: Producto/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Product p = db.GetById(id);
+            if (p == null)
+                return HttpNotFound();
+
+
+            return View(p);
         }
 
 
@@ -88,40 +90,63 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         // GET: Producto/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Product p = db.GetById(id);
+            if (p == null)
+                return HttpNotFound();
+
+            ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName");
+            return View(p);
         }
 
         // POST: Producto/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Product product)
         {
             try
             {
-                // TODO: Add update logic here
+                bool resultado = false;
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                { 
+                    resultado = db.Update(product);
+                
+                    if(resultado)
+                        return RedirectToAction("Index");
+                }
+
+
+                ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",product.ArtistId);
+                return View(product);
             }
             catch
             {
-                return View();
+                return View(product);
             }
         }
 
         // GET: Producto/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Product p = db.GetById(id);
+            if (p == null)
+                return HttpNotFound();
+
+            return View(p);
         }
 
         // POST: Producto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Product product)
         {
             try
             {
-                // TODO: Add delete logic here
+                bool resultado = db.Delete(product);
 
-                return RedirectToAction("Index");
+                if (resultado)
+                    return RedirectToAction("Index");
+
+                ViewBag.MessageDanger = "Error al intentar borrar el producto, intente mas tarde.";
+                return View(product);
             }
             catch
             {

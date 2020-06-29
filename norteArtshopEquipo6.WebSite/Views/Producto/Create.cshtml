@@ -31,9 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Artist, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-       
-              
-              
+                @Html.DropDownList("ArtistId", (IEnumerable<SelectListItem>)ViewData["Artistas"], "Seleccione...", htmlAttributes: new { @class = "selectpicker form-control", @data_live_search = "true" })
                 @Html.ValidationMessageFor(model => model.ArtistId, "", new { @class = "text-danger" })
 
 
