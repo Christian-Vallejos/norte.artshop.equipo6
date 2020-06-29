@@ -9,9 +9,9 @@ namespace norte.ArtshopEquipo6.Data.Services
 {
    public interface IProductoData
     {
-        IEnumerable<Producto> GetProductos();
+        IEnumerable<Product> GetProductos();
 
-        bool AddProducto(Producto prod);
+        bool AddProducto(Product prod);
 
     }
 }

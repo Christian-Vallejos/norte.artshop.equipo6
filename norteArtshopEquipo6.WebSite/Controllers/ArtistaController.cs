@@ -1,4 +1,5 @@
-﻿using norte.ArtshopEquipo6.Data.Model;
+﻿using Microsoft.AspNet.Identity;
+using norte.ArtshopEquipo6.Data.Model;
 using norte.ArtshopEquipo6.Data.Services;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 {
     public class ArtistaController : BaseControllerBorrar
     {
-        private BaseDataService<Artista> db = new BaseDataService<Artista>();
+        private BaseDataService<Artist> db = new BaseDataService<Artist>();
 
 
         public ArtistaController() {
@@ -23,20 +24,23 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         }
 
 
-
         public ActionResult Create()
         {
-            var model = new Artista();
+            var model = new Artist();
             return View(model);
         }
 
-
-
-            [HttpPost]
-        public ActionResult Create(Artista art)
+        [HttpPost]
+        public ActionResult Create(Artist art)
         {
             bool resultado = false;
-
+           
+            art.ChangedBy = User.Identity.GetUserName();
+            art.CreatedBy = User.Identity.GetUserName();
+            art.CreatedOn = DateTime.Now;
+            art.ChangedOn = DateTime.Now;
+          
+            
             CheckAuditPattern(art, false);
 
             if (ModelState.IsValid)

@@ -72,10 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Artista.cs" />
+    <Compile Include="Model\Artist.cs" />
     <Compile Include="Model\Error.cs" />
     <Compile Include="Model\IdentityBase.cs" />
-    <Compile Include="Model\Producto.cs" />
+    <Compile Include="Model\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ArtShopDbContext.cs" />
     <Compile Include="Services\BaseControllerBorrar.cs" />

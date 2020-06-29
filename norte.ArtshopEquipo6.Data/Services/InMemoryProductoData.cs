@@ -11,13 +11,13 @@ namespace norte.ArtshopEquipo6.Data.Services
     public class InMemoryProductoData : IProductoData
 
     {
-        private List<Producto> productos;
+        private List<Product> productos;
         private Random randomize;
 
         public InMemoryProductoData() {
              randomize = new Random();
-            productos = new List<Producto>();
-            productos.Add(new Producto()
+            productos = new List<Product>();
+            productos.Add(new Product()
             {
                 ArtistId = 1,
                 Id = 1,
@@ -33,7 +33,7 @@ namespace norte.ArtshopEquipo6.Data.Services
                 ChangedBy = "Test"
             });
 
-            productos.Add(new Producto()
+            productos.Add(new Product()
             {
                 ArtistId = 1,
                 Id = 2,
@@ -49,7 +49,7 @@ namespace norte.ArtshopEquipo6.Data.Services
                 ChangedBy = "Test"
             });
 
-            productos.Add(new Producto()
+            productos.Add(new Product()
             {
                 ArtistId = 1,
                 Id = 3,
@@ -69,7 +69,7 @@ namespace norte.ArtshopEquipo6.Data.Services
         
         
         
-        public bool AddProducto(Producto prod)
+        public bool AddProducto(Product prod)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace norte.ArtshopEquipo6.Data.Services
             }
         }
 
-        public IEnumerable<Producto> GetProductos()
+        public IEnumerable<Product> GetProductos()
         {
             return productos;
         }

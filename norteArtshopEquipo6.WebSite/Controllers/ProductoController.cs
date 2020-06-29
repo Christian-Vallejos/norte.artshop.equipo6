@@ -5,16 +5,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
     public class ProductoController : BaseControllerBorrar
     {
-        private BaseDataService<Producto> db = new BaseDataService<Producto>();
+        private BaseDataService<Product> db = new BaseDataService<Product>();
+        private BaseDataService<Artist> dbArtist = new BaseDataService<Artist>();
 
         // GET: Producto
         public ActionResult Index()
+
+
        {
+            List<SelectListItem> lst = new List<SelectListItem>();
+
+            dbArtist.Get().ForEach(a =>
+             lst.Add(new SelectListItem() { Text = a.FullName, Value = a.Id.ToString() }));
+
+            ViewBag.artistas = lst;
             var list = db.Get();
             return View(list);
         }
@@ -23,25 +33,35 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
-            var Producto = new Producto();
+            var Producto = new Product();
+            List<SelectListItem> lst = new List<SelectListItem>();
+
+            dbArtist.Get().ForEach(a =>
+             lst.Add(new SelectListItem() { Text = a.FullName, Value = a.Id.ToString() }));
+            ViewBag.artistas = lst;
+           
             return View(Producto);
         }
 
         // POST: Producto/Create
         [HttpPost]
-        public ActionResult Create(Producto prod)
-        {
+        public ActionResult Create(Product prod, FormCollection form)
+                  {
             try
             {
                 bool resultado = false;
-
+                prod.ChangedBy = User.Identity.GetUserName();
+                prod.CreatedBy = User.Identity.GetUserName();
+                prod.CreatedOn = DateTime.Now;
+                prod.ChangedOn = DateTime.Now;
+                prod.ArtistId = 29;
+  
                 CheckAuditPattern(prod, false);
 
                 if (ModelState.IsValid)
                     resultado = db.Create(prod);
                 else
                     return View(prod);
-
 
                 if (resultado)
                     return RedirectToAction("Index");

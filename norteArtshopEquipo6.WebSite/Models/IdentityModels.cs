@@ -30,8 +30,8 @@ namespace norteArtshopEquipo6.WebSite.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<norte.ArtshopEquipo6.Data.Model.Artista> Artistas { get; set; }
+        public System.Data.Entity.DbSet<norte.ArtshopEquipo6.Data.Model.Artist> Artistas { get; set; }
 
-        public System.Data.Entity.DbSet<norte.ArtshopEquipo6.Data.Model.Producto> Productoes { get; set; }
+        public System.Data.Entity.DbSet<norte.ArtshopEquipo6.Data.Model.Product> Productoes { get; set; }
     }
 }

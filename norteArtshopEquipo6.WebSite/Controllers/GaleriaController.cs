@@ -16,6 +16,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
         public ActionResult Index()
         {
+            List<SelectListItem> lst = new List<SelectListItem>();
             var list = db.GetProductos();
             return View(list);
         }

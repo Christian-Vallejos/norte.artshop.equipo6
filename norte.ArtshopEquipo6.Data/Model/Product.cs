@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace norte.ArtshopEquipo6.Data.Model
 {
-   public class Producto : IdentityBase
+   public class Product : IdentityBase
     {
-        //public int Id { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -27,6 +28,7 @@ namespace norte.ArtshopEquipo6.Data.Model
         public string ChangedBy { get; set; }
 
 */
-        public virtual Artista Artista { get; set; }
+        public virtual Artist Artist { get; set; }
+
     }
 }

@@ -84,7 +84,7 @@ namespace norte.ArtshopEquipo6.Data.Services
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -109,11 +109,12 @@ namespace norte.ArtshopEquipo6.Data.Services
         {
             try { 
                 _db.Set<T>().Add(entity);
-                _db.SaveChanges();
+               _db.SaveChanges();
                 return true;
              }
-            catch (Exception)
+            catch (Exception ex)
             {
+                
                 return false;
             }
 

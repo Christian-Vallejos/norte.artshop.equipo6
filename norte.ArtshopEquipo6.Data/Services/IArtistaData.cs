@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace norte.ArtshopEquipo6.Data.Services
 {
-    public interface IArtistaData
+    public interface IArtistaData 
     {
-        IEnumerable<Artista> GetArtistas();
+        IEnumerable<Artist> GetArtists();
 
-        bool AddArtista(Artista art);
+        bool AddArtista(Artist art);
 
     }
 }

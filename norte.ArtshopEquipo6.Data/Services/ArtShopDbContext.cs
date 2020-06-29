@@ -24,10 +24,10 @@ namespace norte.ArtshopEquipo6.Data.Services
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
         /// DbSet Artist se utiliza para representar una tabla.
-        public virtual DbSet<Artista> Artist { get; set; }
+        public virtual DbSet<Artist> Artist { get; set; }
 
         /// DbSet Product se utiliza para representar una tabla.
-        public virtual DbSet<Producto> Product { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
         /// DbSet Product se utiliza para representar una tabla.
         public virtual DbSet<Error> Error { get; set; }
 
