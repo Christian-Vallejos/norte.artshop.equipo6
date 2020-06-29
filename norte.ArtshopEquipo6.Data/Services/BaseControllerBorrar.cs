@@ -29,6 +29,11 @@ namespace norte.ArtshopEquipo6.Data.Services
                 model.CreatedOn = DateTime.Now;
                 model.CreatedBy = userId;
             }
+            if (model.CreatedOn == new DateTime(0001,01,01))
+            {
+                model.CreatedOn = DateTime.Now;
+                model.CreatedBy = userId;
+            }
             model.ChangedOn = DateTime.Now;
             model.ChangedBy = userId;
         }

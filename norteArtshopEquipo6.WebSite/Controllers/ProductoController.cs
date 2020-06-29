@@ -57,8 +57,6 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
                     if (resultado)
                         return RedirectToAction("Index");
-                    else
-                        return View(prod);
                 }
 
 
