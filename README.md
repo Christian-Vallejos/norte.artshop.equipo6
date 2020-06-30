@@ -1,9 +1,11 @@
 ##  Trabajo LPPA - Artshop - Equipo 6
+URL:
+http://norteequipo6.somee.com/
 
 ## Equipo:
 El equipo está conformado por:
 
- - pepe 123
+
 
 
 ## Objetivo del proyecto:
