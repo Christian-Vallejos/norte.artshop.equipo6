@@ -23,7 +23,7 @@ namespace norte.ArtshopEquipo6.Data.Model
         [Display(Name = "Artista")]
         public int ArtistId { get; set; }
 
-        [Required]
+       
         [Display(Name = "Imagen")]
         public string Image { get; set; }
 

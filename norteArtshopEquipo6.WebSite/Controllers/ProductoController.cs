@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using System.IO;
+using WebGrease;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
@@ -42,10 +44,29 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
         // POST: Producto/Create
         [HttpPost]
-        public ActionResult Create(Product prod, FormCollection form)
+        public ActionResult Create(Product prod,  HttpPostedFileBase file )
                   {
             try
             {
+               if (file != null & file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string path = Path.Combine(Server.MapPath("/content/products"), filename);
+                    //valido si existe el archivo para no pisarlo
+                    Boolean existe = System.IO.File.Exists(path);
+                    while (existe)
+                    {
+                        //Si existe el archivo genero un UUID y grabo el archivo con otro nombre
+                        //Lo meti dentro de un while por si se da una de las infimas posibilidades de que se repita un nombre. 
+                        string newFilename = Guid.NewGuid() + filename;
+                        path = Path.Combine(Server.MapPath("/content/products"), newFilename);
+                        existe = System.IO.File.Exists(path);
+                    }
+                    file.SaveAs(path);
+                    //Transformo el full path en path relativo (sino no funciona el mostrar imagen)
+                    string temporalPath = "\\content\\" + path.Split(new string[] { "content" }, StringSplitOptions.None)[1];
+                    prod.Image = temporalPath;
+                }
                 bool resultado = false;
 
                 //Este metodo llena los campos de Createdon/changedby....
