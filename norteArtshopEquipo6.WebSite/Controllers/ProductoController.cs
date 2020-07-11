@@ -10,6 +10,7 @@ using System.Net;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
+    [Authorize(Roles ="Management")]
     public class ProductoController : BaseControllerBorrar
     {
         private BaseDataService<Product> db = new BaseDataService<Product>();
