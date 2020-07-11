@@ -27,8 +27,14 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
         public ActionResult Create()
         {
-            var model = new Artist();
-            return View(model);
+            if (User.IsInRole("admin"))
+            {
+                var model = new Artist();
+                return View(model);
+            }
+            else {
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]

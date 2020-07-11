@@ -37,10 +37,17 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
-            var Producto = new Product();
+            if (User.IsInRole("admin"))
+            {
+                var Producto = new Product();
 
-            ViewBag.Artistas =  new SelectList(dbArtist.Get(), "Id", "FullName");
-            return View(Producto);
+                ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName");
+                return View(Producto);
+            }
+            else {
+                return RedirectToAction("Index");
+
+            }
         }
 
         // POST: Producto/Create
