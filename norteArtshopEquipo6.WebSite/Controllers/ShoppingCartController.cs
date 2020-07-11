@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
-    public class ShoppingCartController : BaseControllerBorrar
+    public class ShoppingCartController : BaseController
     {
 
         private ArtShopDbContext db = new ArtShopDbContext();

@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Evitamos subir las fotos de nuestras pruebas al git.
+norteArtshopEquipo6.WebSite/Content/products

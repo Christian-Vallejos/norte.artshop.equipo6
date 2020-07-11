@@ -7,11 +7,13 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using System.IO;
+using WebGrease;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
-    [Authorize(Roles ="Management")]
-    public class ProductoController : BaseControllerBorrar
+    [Authorize]
+    public class ProductoController : BaseController
     {
         private BaseDataService<Product> db = new BaseDataService<Product>();
         private BaseDataService<Artist> dbArtist = new BaseDataService<Artist>();
@@ -35,18 +37,44 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
-            var Producto = new Product();
+            if (User.IsInRole("admin"))
+            {
+                var Producto = new Product();
 
-            ViewBag.Artistas =  new SelectList(dbArtist.Get(), "Id", "FullName");
-            return View(Producto);
+                ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName");
+                return View(Producto);
+            }
+            else {
+                return RedirectToAction("Index");
+
+            }
         }
 
         // POST: Producto/Create
         [HttpPost]
-        public ActionResult Create(Product prod, FormCollection form)
+        public ActionResult Create(Product prod,  HttpPostedFileBase file )
                   {
             try
             {
+               if (file != null & file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string path = Path.Combine(Server.MapPath("/content/products"), filename);
+                    //valido si existe el archivo para no pisarlo
+                    Boolean existe = System.IO.File.Exists(path);
+                    while (existe)
+                    {
+                        //Si existe el archivo genero un UUID y grabo el archivo con otro nombre
+                        //Lo meti dentro de un while por si se da una de las infimas posibilidades de que se repita un nombre. 
+                        string newFilename = Guid.NewGuid() + filename;
+                        path = Path.Combine(Server.MapPath("/content/products"), newFilename);
+                        existe = System.IO.File.Exists(path);
+                    }
+                    file.SaveAs(path);
+                    //Transformo el full path en path relativo (sino no funciona el mostrar imagen)
+                    string temporalPath = "\\content\\" + path.Split(new string[] { "content" }, StringSplitOptions.None)[1];
+                    prod.Image = temporalPath;
+                }
                 bool resultado = false;
 
                 //Este metodo llena los campos de Createdon/changedby....

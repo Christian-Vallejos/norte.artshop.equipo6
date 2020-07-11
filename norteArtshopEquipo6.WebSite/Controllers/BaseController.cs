@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace norte.ArtshopEquipo6.Data.Services
 {
-    public class BaseControllerBorrar : Controller
+    public class BaseController : Controller
     {
         protected bool ModelIsValid(List<ValidationResult> listModel)
         {
