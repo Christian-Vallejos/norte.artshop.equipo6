@@ -20,5 +20,10 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             var list = db.GetProductos();
             return View(list);
         }
+
+
+
+
+
     }
 }
