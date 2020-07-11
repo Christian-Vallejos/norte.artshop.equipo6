@@ -12,7 +12,8 @@ using WebGrease;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
-    public class ProductoController : BaseControllerBorrar
+    [Authorize]
+    public class ProductoController : BaseController
     {
         private BaseDataService<Product> db = new BaseDataService<Product>();
         private BaseDataService<Artist> dbArtist = new BaseDataService<Artist>();
