@@ -56,6 +56,46 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 return false;
             }
         }
+         public bool Remove1(CartItem cartItem)
+        {
+            try
+            {
+                var CarItemDB = db.CartItem.Where(x => x.Id == cartItem.Id).FirstOrDefault();
+
+                if (CarItemDB.Quantity > 1)
+                {
+                    CarItemDB.Quantity -= 1;
+                    db.CartItem.AddOrUpdate(CarItemDB);
+                }
+                else 
+                {
+                    db.CartItem.Remove(CarItemDB);
+                }
+
+
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+
+        public bool Delete(CartItem cartItem)
+        {
+            try
+            {
+                db.CartItem.Remove(cartItem);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         // GET: CartItem/Edit/5
         public ActionResult Edit(int id)
