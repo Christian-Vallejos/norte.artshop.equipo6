@@ -84,7 +84,7 @@
                         @Html.DisplayFor(modelItem => item.AvgStars) ✰
                     </td>
                     <td>
-                        <a href="@Url.Action("AgergarAlCarrito", new { id = item.Id })">Agregar Al Carrito</a>
+                        <a href="@Url.Action("AgregarAlCarrito", new { id = item.Id })">Agregar Al Carrito</a>
                     </td>
                     @if (Request.IsAuthenticated && User.IsInRole("admin"))
                     {
