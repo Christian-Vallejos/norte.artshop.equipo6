@@ -97,8 +97,10 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",prod.ArtistId);
                 return View(prod);
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.Instance.LogException(ex);
+                ViewBag.MessageDanger = ex.Message;
                 return View(prod);
             }
         }
