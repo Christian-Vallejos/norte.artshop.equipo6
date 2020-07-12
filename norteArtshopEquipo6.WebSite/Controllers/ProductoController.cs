@@ -169,7 +169,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             if (p == null)
                 return HttpNotFound();
 
-            ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName");
+            ViewBag.ArtistId = new SelectList(dbArtist.Get(), "Id", "FullName",p.ArtistId);
             return View(p);
         }
 
@@ -180,20 +180,28 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             try
             {
                 bool resultado = false;
+                var productAnterior = dbcontext.Product.Find(product.Id);
+
+                if (product.Image == null) //en el caso de que no le pasen imagen, toma la anterior.
+                {
+                    product.Image = productAnterior.Image;
+                }
 
                 if (ModelState.IsValid)
-                { 
+                {
+                    CheckAuditPattern(product, false);
                     db.Update(product);
                 
-                        return RedirectToAction("Index");
+                    return RedirectToAction("Index");
                 }
 
 
-                ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",product.ArtistId);
+                ViewBag.ArtistId = new SelectList(dbArtist.Get(), "Id", "FullName",product.ArtistId);
                 return View(product);
             }
             catch
             {
+                ViewBag.ArtistId = new SelectList(dbArtist.Get(), "Id", "FullName", product.ArtistId);
                 return View(product);
             }
         }
@@ -215,9 +223,8 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             try
             {
                  db.Delete(product.Id);
-
                 
-                    return RedirectToAction("Index");
+                 return RedirectToAction("Index");
 
                 //ViewBag.MessageDanger = "Error al intentar borrar el producto, intente mas tarde.";
                // return View(product);
