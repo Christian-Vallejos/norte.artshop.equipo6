@@ -62,62 +62,28 @@ namespace norte.ArtshopEquipo6.Data.Services
         {
             return _db.Set<T>().SingleOrDefault(x => x.Id == id);
         }
-
-        public virtual bool Update(T entity)
+        public virtual void Update(T entity)
         {
-            try
-            {
                 _db.Entry(entity).State = EntityState.Modified;
                 _db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
-
-        public virtual bool Delete(T entity)
+        public virtual void Delete(T entity)
         {
-            try { 
-                _db.Set<T>().Remove(entity);
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-}
-
-        public virtual bool Delete(int id)
+            _db.Set<T>().Remove(entity);
+            _db.SaveChanges();
+        }
+        public virtual void Delete(int id)
         {
-            try { 
                 var entity = _db.Set<T>().Find(id);
                 _db.Set<T>().Remove(entity);
                 _db.SaveChanges();
-                 return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
 
-}
-
-        public virtual bool Create(T entity)
+        }
+        public virtual T Create(T entity)
         {
-            try { 
-                _db.Set<T>().Add(entity);
-               _db.SaveChanges();
-                return true;
-             }
-            catch (Exception ex)
-            {
-                
-                return false;
-            }
-
-}
+            _db.Set<T>().Add(entity);
+            _db.SaveChanges();
+            return entity;
+        }
     }
 }

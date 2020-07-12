@@ -28,9 +28,6 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             return View();
         }
 
-
-
-
         public bool Create(CartItem cartItem)
         {
             try
