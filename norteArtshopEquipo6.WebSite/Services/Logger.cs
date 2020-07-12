@@ -39,7 +39,7 @@ namespace norteArtshopEquipo6.WebSite.Services
             }
             catch
             {
-                /* no hacer nada, o enviar un correo electrónico al webmaster */
+
             }
         }
     }
