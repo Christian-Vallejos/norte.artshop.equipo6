@@ -23,8 +23,8 @@
                     <th width="10%">
                         Titulo
                     </th>
-                    <th width="10%">
-                        Descripcion
+                    <th width="7%">
+                        Desc
                     </th>
                     <th width="30%">
                         Imagen
@@ -39,49 +39,61 @@
                         Ventas
                     </th>
 
-                    <th width="10%">
-                        Estrellas
+                    <th width="7%">
+                        Calif
                     </th>
                     <th width="10%">
 
                     </th>
+                    @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                    {
+                        <th width="25%">
+
+                        </th>
+                    }
                 </tr>
 
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @*<a href=@item.Image>*@
-                            <img src=@item.Image width="80" height="100" class="container-enlarge" onclick="cambiarImagen(this)" />
-                            @*<a href=@item.Image class="zoom"><img id="grande" src=@item.Image /></a>*@
-                            @*</a>*@
-                            @*<img src=@item.Image width="80" height="100" style="align-content: flex-end" ;" />*@
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ArtistId)
-                        </td>
-                        <td type="number">
-                            $ @item.Price
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.QuantitySold)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AvgStars) ✰
-                        </td>
-                        <td>
-                            Agregar al Carrito
-                        </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @*<a href=@item.Image>*@
+                    <img src=@item.Image width="80" height="100" class="container-enlarge" onclick="cambiarImagen(this)" />
+                    @*<a href=@item.Image class="zoom"><img id="grande" src=@item.Image /></a>*@
+                    @*</a>*@
+                    @*<img src=@item.Image width="80" height="100" style="align-content: flex-end" ;" />*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArtistId)
+                </td>
+                <td type="number">
+                    $ @item.Price
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantitySold)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgStars) ✰
+                </td>
+                <td>
+                    Agregar
+                </td>
+                @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                    </td>
+                }
 
-
-                    </tr>
+            </tr>
                 }
 
             </table>

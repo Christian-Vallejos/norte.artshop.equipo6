@@ -32,7 +32,7 @@ namespace norte.ArtshopEquipo6.Data.Model
         public string Description { get; set; }
 
         [Required]
-        [DisplayName("Recetas")]
+        [DisplayName("Obras")]
         public int TotalProducts { get; set; }
 
         [NotMapped]

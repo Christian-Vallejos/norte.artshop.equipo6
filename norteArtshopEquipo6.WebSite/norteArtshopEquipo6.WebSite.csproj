@@ -250,6 +250,10 @@
     <Content Include="Views\Galeria\Index.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
+    <Content Include="Views\Artista\Edit.cshtml" />
+    <Content Include="Views\Artista\Delete.cshtml" />
+    <Content Include="Views\Producto\Edit.cshtml" />
+    <Content Include="Views\Producto\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

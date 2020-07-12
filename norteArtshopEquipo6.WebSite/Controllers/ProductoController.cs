@@ -167,7 +167,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         {
             try
             {
-                bool resultado = db.Delete(product);
+                bool resultado = db.Delete(product.Id);
 
                 if (resultado)
                     return RedirectToAction("Index");

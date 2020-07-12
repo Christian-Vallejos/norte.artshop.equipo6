@@ -14,7 +14,6 @@
             <button onclick="window.location.href='@Url.Action("Create", "Artista")'"> Nuevo Artista </button>
         }
 
-
         <h2 class="categories"> Artistas</h2>
 
         <div>
@@ -37,34 +36,49 @@
                         Descripción
                     </th>
 
+                    @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                    {
+                        <th width="25%">
+
+                        </th>
+                        <th width="25%">
+
+                        </th>
+                    }
                 </tr>
 
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Country)
-                        </td>
-                        <td>
-                            @item.TotalProducts
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @item.TotalProducts
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                    </td>
+                }
+            </tr>
                 }
 
             </table>
-
-
-
         </div>
     </div>
 }
