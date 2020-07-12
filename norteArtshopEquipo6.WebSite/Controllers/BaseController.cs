@@ -8,7 +8,7 @@ namespace norte.ArtshopEquipo6.Data.Services
 {
     public class BaseController : Controller
     {
-        protected CartController cartController = new CartController();
+        //protected CartController cartController = new CartController();
 
         protected bool ModelIsValid(List<ValidationResult> listModel)
         {

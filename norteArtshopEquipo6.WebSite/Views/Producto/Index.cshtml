@@ -1,151 +1,99 @@
 ﻿@model IEnumerable<norte.ArtshopEquipo6.Data.Model.Product>
 
+    <div class="post">
+        <h2> Lista de Obras de Arte disponibles.</h2>
+        <p class="byline"> Hay un total de @Enumerable.Count(Model)  obras de arte.</p>
+
+        @if (Request.IsAuthenticated && User.IsInRole("admin"))
+        {
+            <button class="byline" onclick="window.location.href='@Url.Action("Create", "Producto")'"> Nueva Obra de arte </button>
+        }
 
 
+        <h2 class="categories"> Obras Disponibles</h2>
 
 
-<div class="post">
-    <h2> Lista de Obras de Arte disponibles.</h2>
-    <p class="byline"> Hay un total de @Enumerable.Count(Model)  obras de arte.</p>
+        <div>
+            <br />
+            <table class="table">
+                <tr>
+                    <th width="10%">
+                        Titulo
+                    </th>
+                    <th width="7%">
+                        Desc
+                    </th>
+                    <th width="30%">
+                        Imagen
+                    </th>
+                    <th width="10%">
+                        Artista
+                    </th>
+                    <th width="10%">
+                        Precio
+                    </th>
+                    <th width="10%">
+                        Ventas
+                    </th>
 
-    @if (Request.IsAuthenticated && User.IsInRole("admin"))
-    {
-        <button class="byline" onclick="window.location.href='@Url.Action("Create", "Producto")'"> Nueva Obra de arte </button>
-    }
-
-
-    <h2 class="categories"> Obras Disponibles</h2>
-
-
-    <div>
-        <br />
-        <table class="table">
-            <tr>
-                <th width="10%">
-                    Titulo
-                </th>
-                <th width="7%">
-                    Desc
-                </th>
-                <th width="30%">
-                    Imagen
-                </th>
-                <th width="10%">
-                    Artista
-                </th>
-                <th width="10%">
-                    Precio
-                </th>
-                <th width="10%">
-                    Ventas
-                </th>
-
-                <th width="7%">
-                    Calif
-                </th>
-                <th width="10%">
-
-                </th>
-                @if (Request.IsAuthenticated && User.IsInRole("admin"))
-                {
-                    <th width="25%">
+                    <th width="7%">
+                        Calif
+                    </th>
+                    <th width="10%">
 
                     </th>
-                }
-            </tr>
-
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @*<a href=@item.Image>*@
-                        <img src=@item.Image width="80" height="100" class="container-enlarge" onclick="MostrarImagen(this)" />
-                        @*<a href=@item.Image class="zoom"><img id="grande" src=@item.Image /></a>*@
-                        @*</a>*@
-                        @*<img src=@item.Image width="80" height="100" style="align-content: flex-end" ;" />*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ArtistId)
-                    </td>
-                    <td type="number">
-                        $ @item.Price
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.QuantitySold)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AvgStars) ✰
-                    </td>
-                    <td>
-                        <a href="@Url.Action("AgergarAlCarrito", new { id = item.Id })">Agregar Al Carrito</a>
-                    </td>
                     @if (Request.IsAuthenticated && User.IsInRole("admin"))
                     {
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.Id })
-                            @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-                        </td>
+                        <th width="25%">
+
+                        </th>
                     }
-
                 </tr>
-            }
-
-        </table>
 
 
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                         <img src=@item.Image width="80" height="100" class="container-enlarge" onclick="cambiarImagen(this)" />
+                           </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArtistId)
+                        </td>
+                        <td type="number">
+                            $ @item.Price
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuantitySold)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AvgStars) ✰
+                        </td>
+                        <td>
+                            <a href="@Url.Action("AgregarAlCarrito", new { id = item.Id })">Agregar Al Carrito</a>
+                        </td>
+                        @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                            </td>
+                        }
 
-    </div>
-</div>
+                    </tr>
+                }
 
-
-
-
-
-
-<div class="modal fade" id="ArtShopModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-md">
-
-            <div class="modal-header">
-                <h2 class="modal-title" id="Titulo">Previsualización </h2>
-            </div>
-
-
-            <div class="modal-body" >
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
+            </table>
         </div>
+        <h1>
+            Cantidad de Productos en  Carrito:@ViewBag.cantidad
+            <br />
+            Monto del carrito : @ViewBag.monto
+        </h1>
     </div>
-</div>
-
-
-<link href="~/Content/Site.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-
-
-<script type="text/javascript">
-
-    function MostrarImagen(element) {
-
-        var imageTag = "<img  src=\"" + element.src + "\"    width=\"550px\" max-height:=\"500px\"  />";
-
-        $('#ArtShopModal .modal-body').html(imageTag);
-        jQuery.noConflict();
-        $('#ArtShopModal').modal('show');
-
-
-    }
-
-</script>

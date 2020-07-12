@@ -1,0 +1,30 @@
+﻿
+@model norte.ArtshopEquipo6.Data.Model.CartItem
+@{
+    ViewBag.Title = "Confirmacion Item Agregado";
+}
+
+<div class="post">
+    <h2 class="title"><a href="#"> Obra agregada a su carrito</a></h2>
+    <p class="byline">
+        <h4>Confirmacion de Item Agregado al Carrito</h4>
+    </p>
+    <div>
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-horizontal">
+                <hr />
+                <span class="text-danger">@ViewBag.MessageDanger</span>
+                  <div class="form-group">
+                    <div class="col-md-offset-2 separator">
+                        <div>@Html.ActionLink("Continuar Comprando", "Index", null, new { @class = "btn-input" })</div>
+                        <div>@Html.ActionLink("Ir al carrito", "../CartItem/Index", null, new { @class = "btn-input" })</div>
+                    </div>
+                </div>
+            </div>}
+    </div>
+</div>
+
+
+

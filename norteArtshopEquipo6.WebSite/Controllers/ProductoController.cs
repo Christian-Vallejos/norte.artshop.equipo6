@@ -9,24 +9,35 @@ using Microsoft.AspNet.Identity;
 using System.Net;
 using System.IO;
 using WebGrease;
-using norteArtshopEquipo6.WebSite.Services;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
     [Authorize]
-    public class ProductoController : BaseController
+    public class ProductoController :  BaseController
     {
         private BaseDataService<Product> db = new BaseDataService<Product>();
         private BaseDataService<Artist> dbArtist = new BaseDataService<Artist>();
+        private CartController cartController = new CartController();
 
 
         private ArtShopDbContext dbcontext = new ArtShopDbContext();
 
-        // GET: Producto
+
+        // GET: Produc
         public ActionResult Index()
+        {
+            if (this.User.Identity.IsAuthenticated)
+            {
 
+                cartController.ConfirmarCarritoCreado();
 
-       {
+                decimal monto;
+                int cant;
+                this.cartController.ObtenerInformacion(out cant, out monto);
+
+                ViewBag.cantidad = cant;
+                ViewBag.monto = monto;
+            }
             List<SelectListItem> lst = new List<SelectListItem>();
 
             dbArtist.Get().ForEach(a =>
@@ -36,9 +47,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             var list = db.Get();
             return View(list);
         }
-
-
-        // GET: Producto/Create
+         // GET: Producto/Create
         public ActionResult Create()
         {
             if (User.IsInRole("admin"))
@@ -79,17 +88,14 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                     string temporalPath = "\\content\\" + path.Split(new string[] { "content" }, StringSplitOptions.None)[1];
                     prod.Image = temporalPath;
                 }
-                bool resultado = false;
+               
 
                 //Este metodo llena los campos de Createdon/changedby....
                 CheckAuditPattern(prod, false);
 
                 if (ModelState.IsValid)
                 {
-                    //resultado = db.Create(prod);
                     db.Create(prod);
-
-                    if (resultado)
                         return RedirectToAction("Index");
                 }
 
@@ -97,18 +103,19 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",prod.ArtistId);
                 return View(prod);
             }
-            catch (Exception ex)
+            catch
             {
-                Logger.Instance.LogException(ex);
-                ViewBag.MessageDanger = ex.Message;
                 return View(prod);
             }
         }
-        public bool AgergarAlCarrito(int? id)
+
+
+
+
+        public ActionResult AgregarAlCarrito(int? id)
         {
             bool resultado = false;
-            if (id != null)
-            {
+           
                 CartItemController cic = new CartItemController();
                 CartItem cartItem = new CartItem();
                 Product prod = db.GetById(id.Value);
@@ -124,10 +131,23 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
                     resultado = cic.Create(cartItem);
                 }
-            }
-            return resultado;
-        }
 
+
+            if (resultado)
+            {
+                cartController.ConfirmarCarritoCreado();
+                    decimal monto;
+                    int cant;
+                    this.cartController.ObtenerInformacion(out cant, out monto);
+                    ViewBag.cantidad = cant;
+                    ViewBag.monto = monto;
+                return View();
+            }
+            else
+                ViewBag.MessageDanger = "Error al intentar borrar el producto, intente mas tarde.";
+                return View();
+
+        }
 
         // GET: Producto/Details/5
         public ActionResult Details(int id)
@@ -139,53 +159,43 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
             return View(p);
         }
+
+
+
         // GET: Producto/Edit/5
         public ActionResult Edit(int id)
         {
             Product p = db.GetById(id);
+            if (p == null)
+                return HttpNotFound();
 
-           if (p == null)
-           return HttpNotFound();
-
-           ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName");
+            ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName");
             return View(p);
         }
 
         // POST: Producto/Edit/5
         [HttpPost]
-        //public ActionResult Edit(Product product)
-        //{
-        //        bool resultado = false;
-
-        //        if (ModelState.IsValid)
-        //        { 
-        //            resultado = db.Update(product);
-
-        //            if(resultado)
-        //            return RedirectToAction("Index");
-        //        }
-        //        ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",product.ArtistId);
-        //        return View(product);
-        //}
         public ActionResult Edit(Product product)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    db.Update(product);
-                    return RedirectToAction("Index");
-                }
-                ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName", product.ArtistId);
-                return View(product);
-            }
-            catch (Exception ex)
-            {
-                Logger.Instance.LogException(ex);
-                ViewBag.MessageDanger = "Error al intentar editar el producto, intente más tarde.";
-                return View(product);
-            }
+                bool resultado = false;
 
+                if (ModelState.IsValid)
+                { 
+                    db.Update(product);
+                
+                        return RedirectToAction("Index");
+                }
+
+
+                ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",product.ArtistId);
+                return View(product);
+            }
+            catch
+            {
+                return View(product);
+            }
         }
 
         // GET: Producto/Delete/5
@@ -204,14 +214,18 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         {
             try
             {
-                db.Delete(product);
-                return RedirectToAction("Index");
+                 db.Delete(product.Id);
+
+                
+                    return RedirectToAction("Index");
+
+                //ViewBag.MessageDanger = "Error al intentar borrar el producto, intente mas tarde.";
+               // return View(product);
             }
-            catch (Exception ex)
+            catch
             {
-                Logger.Instance.LogException(ex);
-                ViewBag.MessageDanger = "Error al intentar borrar el producto, intente más tarde.";
-                return View(product);
+                ViewBag.MessageDanger = "Error al intentar borrar el producto, intente mas tarde.";
+                return View();
             }
         }
     }

@@ -11,10 +11,17 @@ using System.Web.UI;
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
     [Authorize]
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private static  ArtShopDbContext db = new ArtShopDbContext();
+   
 
+
+        public ActionResult Index()
+        {
+            var list = GetCart();
+            return View(list);
+        }
 
         public Cart GetCart()
         {
@@ -62,14 +69,12 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 Cart carrito = new Cart();
                 carrito.UserId = userId;
                 carrito.CartDate = DateTime.Now;
-                carrito.CreatedOn = DateTime.Now;
-                carrito.CreatedBy = userId;
+                CheckAuditPattern(carrito, true);
                 db.Cart.Add(carrito);
-                //db.SaveChanges();
+                db.SaveChanges();
+
 
             }
         }
-
-
     }
 }

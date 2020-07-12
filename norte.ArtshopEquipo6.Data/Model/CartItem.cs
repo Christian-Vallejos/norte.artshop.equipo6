@@ -17,7 +17,7 @@ namespace norte.ArtshopEquipo6.Data.Model
 
         public int Quantity { get; set; }
 
-
+        public virtual Product Product { get; set; }
         public virtual Cart Cart { get; set; }
     }
 }

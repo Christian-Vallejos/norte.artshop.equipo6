@@ -9,12 +9,16 @@ using System.Web.Mvc;
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
     public class HomeController : BaseController
+         
+
     {
+        protected new CartController cartController = new CartController();
         public ActionResult Index()
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                this.cartController.ConfirmarCarritoCreado();
+                
+               cartController.ConfirmarCarritoCreado();
 
                 decimal monto;
                 int cant;
