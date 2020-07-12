@@ -18,6 +18,9 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         private BaseDataService<Product> db = new BaseDataService<Product>();
         private BaseDataService<Artist> dbArtist = new BaseDataService<Artist>();
 
+
+        private ArtShopDbContext dbcontext = new ArtShopDbContext();
+
         // GET: Producto
         public ActionResult Index()
 
@@ -99,6 +102,31 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         }
 
 
+
+
+        public bool AgergarAlCarrito(int? id)
+        {
+            bool resultado = false;
+            if (id != null)
+            {
+                CartItemController cic = new CartItemController();
+                CartItem cartItem = new CartItem();
+                Product prod = db.GetById(id.Value);
+
+
+                if (prod != null)
+                {
+                    cartItem.ProductId = prod.Id;
+                    cartItem.Price = (decimal)prod.Price;
+                    cartItem.Quantity = 1;
+
+                    CheckAuditPattern(cartItem, false);
+
+                    resultado = cic.Create(cartItem);
+                }
+            }
+            return resultado;
+        }
 
 
         // GET: Producto/Details/5

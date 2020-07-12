@@ -1,4 +1,5 @@
-﻿using System;
+﻿using norteArtshopEquipo6.WebSite.Controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
@@ -7,6 +8,8 @@ namespace norte.ArtshopEquipo6.Data.Services
 {
     public class BaseController : Controller
     {
+        protected CartController cartController = new CartController();
+
         protected bool ModelIsValid(List<ValidationResult> listModel)
         {
             var message = string.Empty;
@@ -35,22 +38,28 @@ namespace norte.ArtshopEquipo6.Data.Services
                 model.CreatedBy = userId;
             }
             model.ChangedOn = DateTime.Now;
-            model.ChangedBy = userId;
+
+            if(userId!=null)
+                model.ChangedBy = userId;
         }
 
         protected virtual string TryGetUserId()
         {
-            if (!User.Identity.IsAuthenticated)
-                return null;
 
             string userId = null;
             try
             {
+                if (!User.Identity.IsAuthenticated)
+                    return null;
+
                 userId = User.Identity.Name;
                 if (userId != null)
                     return userId;
             }
-            catch { /* no action */}
+            catch
+            {
+                return null;
+            }
 
             return userId;
         }
