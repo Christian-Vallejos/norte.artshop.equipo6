@@ -90,7 +90,8 @@
                 @Html.HiddenFor(model => model.CreatedBy)
                 <div class="form-group">
                     <div class="col-md-offset-2 separator">
-                        <input type="submit" value="Guardar" class="btn-input" />
+                        @* <input type="submit" value="Guardar" class="btn-input" />*@
+                        <button type="submit">Guardar</button>
                         @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn-input" })
                     </div>
                 </div>
