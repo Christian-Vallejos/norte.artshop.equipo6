@@ -1,0 +1,61 @@
+﻿
+
+
+<div class="post">
+    <h2> Lista de Obras de Arte disponibles.</h2>
+
+    @if (Request.IsAuthenticated && User.IsInRole("admin"))
+    {
+        <button class="byline" onclick="window.location.href='@Url.Action("Create", "Producto")'"> Nueva Obra de arte </button>
+    }
+
+
+    <h2 class="categories"> Obras Disponibles</h2>
+
+
+    <div>
+        <br />
+        <table class="table">
+            <tr>
+                <th width="10%">
+                    Titulo
+                </th>
+                <th width="7%">
+                    Desc
+                </th>
+                <th width="30%">
+                    Imagen
+                </th>
+                <th width="10%">
+                    Artista
+                </th>
+                <th width="10%">
+                    Precio
+                </th>
+                <th width="10%">
+                    Ventas
+                </th>
+
+                <th width="7%">
+                    Calif
+                </th>
+                <th width="10%">
+
+                </th>
+                @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <th width="25%">
+
+                    </th>
+                }
+            </tr>
+
+
+      
+
+        </table>
+
+
+
+    </div>
+</div>
