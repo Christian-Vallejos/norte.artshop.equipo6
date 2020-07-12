@@ -65,7 +65,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 carrito.CreatedOn = DateTime.Now;
                 carrito.CreatedBy = userId;
                 db.Cart.Add(carrito);
-                db.SaveChanges();
+                //db.SaveChanges();
 
             }
         }

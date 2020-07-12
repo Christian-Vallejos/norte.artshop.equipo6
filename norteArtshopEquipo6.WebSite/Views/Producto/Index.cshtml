@@ -53,7 +53,6 @@
 
                 @foreach (var item in Model)
                 {
-<<<<<<< HEAD
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
@@ -81,7 +80,7 @@
                     @Html.DisplayFor(modelItem => item.AvgStars) ✰
                 </td>
                 <td>
-                    Agregar
+                    <a href="@Url.Action("AgergarAlCarrito", new { id = item.Id })">Agregar Al Carrito</a>
                 </td>
                 @if (Request.IsAuthenticated && User.IsInRole("admin"))
                 {
@@ -92,41 +91,7 @@
                 }
 
             </tr>
-=======
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @*<a href=@item.Image>*@
-                            <img src=@item.Image width="80" height="100" class="container-enlarge" onclick="cambiarImagen(this)" />
-                            @*<a href=@item.Image class="zoom"><img id="grande" src=@item.Image /></a>*@
-                            @*</a>*@
-                            @*<img src=@item.Image width="80" height="100" style="align-content: flex-end" ;" />*@
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ArtistId)
-                        </td>
-                        <td type="number">
-                            $ @item.Price
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.QuantitySold)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AvgStars) ✰
-                        </td>
-                        <td>
-                            <a href="@Url.Action("AgergarAlCarrito", new { id = item.Id })" >Agregar Al Carrito</a>
-                        </td>
-
-
-                    </tr>
->>>>>>> c611a3981582b15e08c0dea20ffb4d8e4b7f1a1b
-                }
+                   }
 
             </table>
 
