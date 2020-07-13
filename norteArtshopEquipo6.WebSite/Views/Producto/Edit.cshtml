@@ -44,8 +44,10 @@
                 <div class="form-group">
                     <label class="control-label">Imagen actual: @Model.Image</label>
                     <div class="separator" style="padding-bottom:120px">
-                        <img width="200" src="~/Content/products/@Model.Image" alt="Imagen del producto. @Model.Image" class="form-control" title="@Model.Image" />
-                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        <div>
+                            <img width="200" src=@Model.Image alt="Imagen del producto. @Model.Image" class="form-control" title="@Model.Image" />
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        </div>        
                     </div>
                 </div>
 

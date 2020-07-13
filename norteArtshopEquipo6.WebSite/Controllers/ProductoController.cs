@@ -114,8 +114,11 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
         public ActionResult AgregarAlCarrito(int? id)
         {
-            bool resultado = false;
-           
+
+            try
+            {
+                bool resultado = false;
+
                 CartItemController cic = new CartItemController();
                 CartItem cartItem = new CartItem();
                 Product prod = db.GetById(id.Value);
@@ -133,19 +136,25 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 }
 
 
-            if (resultado)
-            {
-                cartController.ConfirmarCarritoCreado();
+                if (resultado)
+                {
+                    cartController.ConfirmarCarritoCreado();
                     decimal monto;
                     int cant;
                     this.cartController.ObtenerInformacion(out cant, out monto);
                     ViewBag.cantidad = cant;
                     ViewBag.monto = monto;
+                    return View();
+                }
+                else
+                    ViewBag.MessageDanger = "Error agregando el producto.";
                 return View();
             }
-            else
-                ViewBag.MessageDanger = "Error al intentar borrar el producto, intente mas tarde.";
-                return View();
+            catch
+            {
+                return RedirectToAction("Product/Index");
+            }
+
 
         }
 
