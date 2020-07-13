@@ -15,7 +15,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
     [Authorize]
     public class CartController : BaseController
     {
-        private static  ArtShopDbContext db = new ArtShopDbContext();
+        private  ArtShopDbContext db = new ArtShopDbContext();
    
 
 
