@@ -26,10 +26,17 @@
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/Artista/">Artistas</a></li>
                     <li><a href="/Producto/">Galeria</a></li>
+                    if (User.IsInRole("admin"))
+                    {
+                        <li><a href="/Cart/ListadoCompras">Administracion</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/CartItem/Index">🛒 Carrito</a></li>
+                    }
                     <li><a href="/home/about/">Acerca</a></li>
                     <li><a href="/home/contact/">Contacto</a></li>
                     <li><a href="/Manage/Index/">Cuenta</a></li>
-                    <li><a href="/CartItem/Index">Carrito</a></li>
                     <li><a href="@Url.Content("~/Account/LogOff")"> Cerrar Sesion</a></li>
                 }
                 else

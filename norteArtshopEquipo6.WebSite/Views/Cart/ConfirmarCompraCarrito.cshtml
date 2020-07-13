@@ -1,0 +1,65 @@
+﻿
+
+    <div class="form-horizontal">
+        <h4>Confirmar Pago </h4>
+        <img src="~/Content/img/aceptamosTarjetas.png" width="150" height="150" class="encart2" onclick="MostrarImagen(this)" />
+        <hr />
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Numero de Tarjeta", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Numero Tarjeta", null, new { type = "number", required = "required" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("Vencimiento formato mm/aa", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Vencimiento Tarjeta", null, new { type = "text", required = "required" })
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+            @Html.Label("Nombre y Apellido", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Nombre Apellido", null, new { type = "text", required = "required" })
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+            @Html.Label("Numero de Documento", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Numero Documento", null, new { type = "number", required = "required" })
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+            @Html.Label("Codigo de seguridad (numero que se encuentra en el reverso de la tarjeta)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Codigo Seguridad", null, new { type = "password", required = "required" })
+            </div>
+        </div>
+
+
+        <br />
+        <div class="form-group">
+            @Html.Label("Costo Total", htmlAttributes: new { @class = "control-label col-md-2" })
+                $@ViewBag.monto
+        </div>
+
+
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button onclick="window.location.href='@Url.Action("Index", "Producto")'"> Volver </button>
+                <button onclick="window.location.href='@Url.Action("CompraConfirmada", "Cart")'"> Confirmar Compra 🛒 </button>
+
+
+            </div>
+        </div>
+    </div>

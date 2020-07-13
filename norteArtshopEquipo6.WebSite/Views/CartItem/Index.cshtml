@@ -7,62 +7,81 @@
 
 <h2>Carrito de compras</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cart.CartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
 
-        <th></th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Cart.CartDate)
-    </td>
-    <td>
-        <img src=@item.Product.Image width="80" height="100" class="container-enlarge" onclick="cambiarImagen(this)" />
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Quantity)
-    </td>
+@if ( Model.FirstOrDefault() != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.CartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
 
-    <td>
-        <div>@Html.ActionLink("Borrar Uno", "../CartItem/Remove1", new { id = item.Id }, new { @class = "btn-input" })</div>
-    </td>
-    <td>
-        @if (item.Quantity > 1)
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
         {
-            <div>@Html.ActionLink("Borrar Todos", "../CartItem/Delete", new { id = item.Id }, new { @class = "btn-input" })</div>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cart.CartDate)
+                </td>
+                <td>
+                    <img src=@item.Product.Image width="80" height="100" class="container-enlarge" onclick="cambiarImagen(this)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+
+                <td>
+                    <div>@Html.ActionLink("Borrar Uno", "../CartItem/Remove1", new { id = item.Id }, new { @class = "btn-input" })</div>
+                </td>
+                <td>
+                    @if (item.Quantity > 1)
+                    {
+                        <div>@Html.ActionLink("Borrar Todos", "../CartItem/Delete", new { id = item.Id }, new { @class = "btn-input" })</div>
+                    }
+                </td>
+
+                @* <td>
+                        <div>@Html.ActionLink("Modificar Cantidad", "../CartItem/Edit", new { idem = item }, new { @class = "btn-input" })</div>
+                    </td>*@
+            </tr>
         }
-    </td>
 
-    <td>
-        <div>@Html.ActionLink("Modificar Cantidad", "../CartItem/Edit", new { idem = item }, new { @class = "btn-input" })</div>
-    </td>
-    </tr>
-    }
-</table>
-<div>
-    <h1>
-        Cantidad de Productos en  Carrito: 
+    <div>
+        <h1>
             <br />
-        Monto del carrito : $@ViewBag.monto
-    </h1>
+            Monto del carrito : $@ViewBag.monto
 
-</div>
+            <br />
+            <div>@Html.ActionLink("Comprar Carrito 🛒", "../Cart/ConfirmarCompraCarrito", null, new { @class = "btn-input" })</div>
+            <br />
+        </h1>
+    </div>
+    </table>
+
+}
+@if (Model.FirstOrDefault() == null)
+{
+<h1>
+    <br />
+    ¡Oh! no!! tu carrito está vacío! Pero que no cunda el pánico. ¡Podes rápidamente llenarlo!
+    <br />
+    <div>@Html.ActionLink("Llenar Carrito", "../Producto/Index", null, new { @class = "btn-input" })</div>
+</h1>
+
+}

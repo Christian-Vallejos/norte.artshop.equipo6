@@ -521,3 +521,18 @@ width: 30px;
         width: 900px
     }
 }
+
+.encart2 {
+    -moz-background-clip: border !important;
+    -moz-background-origin: padding !important;
+    -moz-background-size: auto auto !important;
+    background-attachment: scroll !important;
+    background-color: transparent !important;
+    background-image: url("../Content/img/tarjetas.png") !important;
+    background-position: 0 0 !important;
+    background-repeat: no-repeat !important;
+    float: right;
+    height: 168px;
+    position: relative;
+    width: 502px;
+}

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Muchas Gracias! Su compra fue confirmada";
+}
+
+<div class="post">
+    <h2 class="title"><a href="#"> Compra confirmada</a></h2>
+    <p class="byline">
+        <h4>Felicitaciones! Su compra fue confirmada</h4>
+    </p>
+    <div>
+        @using (Html.BeginForm())
+        {
+
+            <div class="byline">
+                <br />
+                <div>Felicitaciones Su compra fue realizada, el pago confirmado, y la orden generada!</div>
+                <br />
+                <div>Guarde su numero de compra -  @ViewBag.NumeroCompra</div>
+                <br />
+                <div>En 48Hs habiles puede pasar a retirar por nuestros talleres.</div>
+                <div>Le enviamos una copia de la informacion a su email.</div>
+                <br />
+                <br />
+                <div>Gracias por comprar en Artshop!</div>
+                <br />
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 separator">
+                    @Html.ActionLink("Volver a la Galeria", "../Producto/Index", null, new { @class = "btn-input" })
+                </div>
+            </div>
+        }
+    </div>
+    </div>
+
+

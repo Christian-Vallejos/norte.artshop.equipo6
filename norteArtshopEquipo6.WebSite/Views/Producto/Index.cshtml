@@ -1,9 +1,5 @@
 ﻿@model IEnumerable<norte.ArtshopEquipo6.Data.Model.Product>
 
-
-
-
-
 <div class="post">
     <h2> Lista de Obras de Arte disponibles.</h2>
     <p class="byline"> Hay un total de @Enumerable.Count(Model)  obras de arte.</p>
@@ -84,7 +80,7 @@
                         @Html.DisplayFor(modelItem => item.AvgStars) ✰
                     </td>
                     <td>
-                        <a href="@Url.Action("AgregarAlCarrito", new { id = item.Id })">Agregar Al Carrito</a>
+                        <a href="@Url.Action("AgregarAlCarrito", new { id = item.Id })">Agregar Al Carrito 🛒</a>
                     </td>
                     @if (Request.IsAuthenticated && User.IsInRole("admin"))
                     {

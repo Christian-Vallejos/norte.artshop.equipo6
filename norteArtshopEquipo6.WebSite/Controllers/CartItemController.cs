@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
+    [Authorize]
     public class CartItemController : BaseController
     {
         protected CartController cartController = new CartController();
@@ -52,7 +53,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 if (cart.Items != null)
                     if (cart.Items.Where(x => x.ProductId == cartItem.ProductId).Count() > 0)
                     {
-                        var CartItemInDB = cart.Items.Where(x => x.ProductId == cartItem.ProductId).First();
+                        var CartItemInDB = cart.Items.Where(x => x.ProductId == cartItem.ProductId).Where(x => x.Cart.Comprado == "false").First();
 
                         cartItem.Quantity += CartItemInDB.Quantity;
 
@@ -74,7 +75,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         {
             try
             {
-                var CarItemDB = db.CartItem.Where(x => x.Id == id).FirstOrDefault();
+                var CarItemDB = db.CartItem.Where(x => x.Id == id).Where(x => x.Cart.Comprado == "false").FirstOrDefault();
 
                 if (CarItemDB.Quantity > 1)
                 {
@@ -109,7 +110,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
             try
             {
 
-                var CarItemDB = db.CartItem.Where(x => x.Id == id).FirstOrDefault();
+                var CarItemDB = db.CartItem.Where(x => x.Id == id).Where(x => x.Cart.Comprado == "false").FirstOrDefault();
 
                 db.CartItem.Remove(CarItemDB);
                 db.SaveChanges();
@@ -137,7 +138,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
 
             try
             {
-                var CarItemDB = db.CartItem.Where(x => x.Id == item.Id).FirstOrDefault();
+                var CarItemDB = db.CartItem.Where(x => x.Id == item.Id).Where(x => x.Cart.Comprado == "false").FirstOrDefault();
 
                 if (item.Quantity > 0)
                 {
@@ -163,7 +164,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         {
             try
             {
-                var CarItemDB = db.CartItem.Where(x => x.Id == id).FirstOrDefault();
+                var CarItemDB = db.CartItem.Where(x => x.Id == id).Where(x => x.Cart.Comprado == "false").FirstOrDefault();
 
                 if (qty > 0)
                 {
