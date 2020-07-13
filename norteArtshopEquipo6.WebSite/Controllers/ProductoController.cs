@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using System.Net;
 using System.IO;
 using WebGrease;
+using norteArtshopEquipo6.WebSite.Services;
 
 namespace norteArtshopEquipo6.WebSite.Controllers
 {
@@ -66,7 +67,7 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         // POST: Producto/Create
         [HttpPost]
         public ActionResult Create(Product prod,  HttpPostedFileBase file )
-                  {
+        {
             try
             {
                if (file != null & file.ContentLength > 0)
@@ -103,14 +104,12 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 ViewBag.Artistas = new SelectList(dbArtist.Get(), "Id", "FullName",prod.ArtistId);
                 return View(prod);
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.Instance.LogException(ex);
                 return View(prod);
             }
         }
-
-
-
 
         public ActionResult AgregarAlCarrito(int? id)
         {
@@ -188,7 +187,6 @@ namespace norteArtshopEquipo6.WebSite.Controllers
         {
             try
             {
-                bool resultado = false;
                 var productAnterior = dbcontext.Product.Find(product.Id);
 
                 if (product.Image == null) //en el caso de que no le pasen imagen, toma la anterior.
@@ -208,8 +206,9 @@ namespace norteArtshopEquipo6.WebSite.Controllers
                 ViewBag.ArtistId = new SelectList(dbArtist.Get(), "Id", "FullName",product.ArtistId);
                 return View(product);
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.Instance.LogException(ex);
                 ViewBag.ArtistId = new SelectList(dbArtist.Get(), "Id", "FullName", product.ArtistId);
                 return View(product);
             }
